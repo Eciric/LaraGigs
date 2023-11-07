@@ -1,7 +1,4 @@
-@extends('layout')
-
-@section('content')
-
+<x-layout>
 @if ($listing)
 <a href="/" class="inline-block text-black ml-4 mb-4"
     ><i class="fa-solid fa-arrow-left"></i> Back
@@ -57,5 +54,4 @@
 <h2>No such listing exists</h2>
 
 @endif
-
-@endsection
+</x-layout>
