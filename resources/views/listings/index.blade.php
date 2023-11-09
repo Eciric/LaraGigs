@@ -5,9 +5,12 @@
         @foreach($listings as $listing) 
          <x-listing-card :listing="$listing"/>
         @endforeach
+        @if(count($listings) == 0)
+        <p>No listings found</p>
+        @endif
     </div>
     
-    @if(count($listings) == 0)
-    <p>No listings found</p>
-    @endif
+    <div class="mt-6 p-4">
+        {{$listings->links()}}
+    </div>
 </x-layout>
