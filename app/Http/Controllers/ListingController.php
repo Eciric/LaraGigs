@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use LogicException;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -69,5 +70,14 @@ class ListingController extends Controller {
 
 
         return back()->with('message', 'Listing updated successfully!');
+    }
+
+    public function destroy(Listing $listing) {
+        try {
+            $listing->delete();
+            return redirect("/")->with('message', 'Listing deleted successfully!');
+        } catch (LogicException $e) {
+            return redirect("/")->with('message', 'Failed to delete listing, error: ' . $e);
+        }
     }
 }
