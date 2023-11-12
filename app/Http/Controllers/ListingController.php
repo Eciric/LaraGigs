@@ -45,6 +45,8 @@ class ListingController extends Controller {
             $formFields['logo'] = $request->file('logo')->store('logos', 'public');
         }
 
+        $formFields['user_id'] = auth()->id();
+
         Listing::create($formFields);
 
 
@@ -79,5 +81,12 @@ class ListingController extends Controller {
         } catch (LogicException $e) {
             return redirect("/")->with('message', 'Failed to delete listing, error: ' . $e);
         }
+    }
+
+    public function manager() {
+        $listings = auth()->user()->listings()->get();
+        return view("listings.manager", [
+            'listings' => $listings
+        ]);
     }
 }
